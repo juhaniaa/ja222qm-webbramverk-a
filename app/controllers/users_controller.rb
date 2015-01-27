@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :require_login, only: [:show]
+  
   def index
   end
   
@@ -11,7 +13,7 @@ class UsersController < ApplicationController
     
     if @user.save
       session[:userid] = @user.id
-      redirect_to user_path
+      redirect_to @user
     else
       render action: :new
     end
@@ -28,7 +30,7 @@ class UsersController < ApplicationController
     u = User.find_by_email(params[:email])
     if u && u.authenticate(params[:password])
       session[:userid] = u.id
-      redirect_to user_path
+      redirect_to u
     else
       flash[:notice] = "Inloggningen misslyckades"
       redirect_to users_path
@@ -36,12 +38,13 @@ class UsersController < ApplicationController
   end
   
   def logout
+    session[:userid] = nil
+    redirect_to users_path, notice: "Du loggades ut"
   end
   
   private
   
   def user_params
-    
-  end
-  
+    params.require(:user).permit(:email, :password)
+  end  
 end

@@ -16,7 +16,10 @@
     <p><%= u.email_field :email %></p>
 
     <p><%= u.label :password, "Lösenord" %></p>
-    <p><%= u.password_field :email %></p>
+    <p><%= u.password_field :password %></p>
+  
+    <p><%= u.label :password_confirmation %></p>
+    <p><%= u.password_field :password_confirmation %></p>
 
     <p><%= u.submit "Registrera användare" %></p>
   <% end %>
