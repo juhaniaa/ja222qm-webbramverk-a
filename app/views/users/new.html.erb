@@ -1,0 +1,25 @@
+<h1>New</h1>
+<h3>Registrera användare</h3>
+
+<% if @user.errors.any? %>
+  <h2>Formuläret ej korrekt ifyllt:</h2>
+  <ul>
+  <% @user.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+  <% end %>
+  </ul>
+<% end %>
+
+<fieldset>
+  <%= form_for @user do |u| %>
+    <p><%= u.label :email, "E-post" %></p>
+    <p><%= u.email_field :email %></p>
+
+    <p><%= u.label :password, "Lösenord" %></p>
+    <p><%= u.password_field :email %></p>
+
+    <p><%= u.submit "Registrera användare" %></p>
+  <% end %>
+</fieldset>
+
+<%= link_to "Logga in", users_path %>
