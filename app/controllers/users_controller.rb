@@ -20,7 +20,12 @@ class UsersController < ApplicationController
   end
   
   def show
-    
+    # kolla att användaren är rätt?
+    #if session[:userid] === params[:id]
+     # render "show"
+    #else
+     # redirect_to users_path
+    #end
   end
   
   
@@ -37,6 +42,7 @@ class UsersController < ApplicationController
     end
   end
   
+  
   def logout
     session[:userid] = nil
     redirect_to users_path, notice: "Du loggades ut"
@@ -45,6 +51,6 @@ class UsersController < ApplicationController
   private
   
   def user_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user).permit(:email, :password, :password_confirmation)
   end  
 end
