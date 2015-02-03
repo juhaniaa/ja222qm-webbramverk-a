@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   
   post  "login" =>   "users#login", as: :login
   get   "logout" =>  "users#logout", as: :logout
-
+  get   "newkey" =>  "users#newkey", as: :newkey
+  get   "remkey" =>  "users#remkey", as: :remkey
+  
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

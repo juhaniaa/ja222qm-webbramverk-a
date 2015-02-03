@@ -1,4 +1,21 @@
 <h1>Show</h1>
 <h3>Du är nu inloggad</h3>
 
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+<% @u = User.find(session[:userid]) %>
+
+<% if @u.apikey %>
+  <p><%= @u.apikey  %></p>
+  <%= link_to "Ta bort nyckel", remkey_path %>
+<% end %>
+<% if !@u.apikey %>
+<%= link_to "Generera nyckel", newkey_path %>
+<% end %>
 <%= link_to "Logga ut", logout_path %>
+
+
+
+

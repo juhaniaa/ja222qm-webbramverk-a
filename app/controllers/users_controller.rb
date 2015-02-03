@@ -2,6 +2,12 @@ class UsersController < ApplicationController
   before_action :require_login, only: [:show]
   
   def index
+    if session[:userid]
+      u = User.find(session[:userid])
+      if u
+        redirect_to u
+      end
+    end
   end
   
   def new
@@ -21,13 +27,28 @@ class UsersController < ApplicationController
   
   def show
     # kolla att användaren är rätt?
-    #if session[:userid] === params[:id]
-     # render "show"
-    #else
-     # redirect_to users_path
-    #end
+    if session[:userid].to_s === params[:id]
+      render "show"
+    else
+      redirect_to users_path
+    end
   end
   
+  # Apinyckelsmetoder
+  
+  def newkey    
+    u = User.find(session[:userid])
+    u.apikey = SecureRandom.hex
+    u.save    
+    redirect_to u
+  end
+  
+  def remkey
+    u = User.find(session[:userid])
+    u.apikey = nil
+    u.save
+    redirect_to u
+  end
   
   # Inloggningsmetoder
   
