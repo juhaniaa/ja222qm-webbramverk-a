@@ -1,0 +1,22 @@
+<h1>Userkeys</h1>
+<h3>Inloggad som Admin</h3>
+
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+<ul>
+<% @Users.each do |u| %>
+  <% if u.apikey %>
+  <li><%= u.email %> - <%= u.apikey %> <%= link_to "Ta bort nyckel", adremovekey_path(u.id) %></li>
+<% end %>  
+<% end %>
+</ul>
+# iterate through all users
+# and show their email + apikey
+# and button to delete that apikey
+
+<%= link_to "Logga ut", adlogout_path %>
+
+
+
+

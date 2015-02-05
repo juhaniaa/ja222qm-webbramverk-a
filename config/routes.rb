@@ -1,16 +1,35 @@
 Rails.application.routes.draw do
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
+  
+  # Exceptions routing
+  match '(errors)/:status', to: 'errors#show',
+    constraints: { status: /\d{3}/ },
+    defaults: { status: '500' },
+    via: :all
+  
+  match '/404', :to => "exceptions#render_404", :via => [:get, :post]
 
   # You can have the root of your site routed with "root"
   root 'users#index'
   
   resources :users
   
-  post  "login" =>   "users#login", as: :login
-  get   "logout" =>  "users#logout", as: :logout
-  get   "newkey" =>  "users#newkey", as: :newkey
-  get   "remkey" =>  "users#remkey", as: :remkey
+  post  "user/login"  =>  "users#login", as: :login
+  get   "user/logout" =>  "users#logout", as: :logout
+  get   "user/newkey" =>  "users#newkey", as: :newkey
+  get   "user/remkey" =>  "users#remkey", as: :remkey
+  
+  get   "admin"  =>  "admins#index", as: :admin
+  post  "admin/login" => "admins#login", as: :adlogin
+  get  "admin/logout" => "admins#logout", as: :adlogout
+  get   "admin/userkeys" => "admins#userkeys", as: :aduserkeys
+  get  "admin/remove/:id" => "admins#removekey", as: :adremovekey
+  
+  
+  
+ 
+  
   
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
@@ -61,3 +80,7 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
 end
+
+
+
+

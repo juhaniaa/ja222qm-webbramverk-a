@@ -1,0 +1,19 @@
+<h1>Admin</h1>
+<h3>Logga in som Admin</h3>
+
+<% if flash[:notice] %>
+  <p><%= flash[:notice] %></p>
+<% end %>
+
+<fieldset>
+  <%= form_tag(adlogin_path, method: "post") do %>
+  <p><%= label_tag(:adminName, "Admin användarnamn:") %></p>
+  <p><%= text_field_tag(:adminName) %></p>
+
+  <p><%= label_tag(:adminPassword, "Lösenord:") %></p>
+    <p><%= password_field_tag(:adminPassword) %></p>
+
+    <p><%= submit_tag("Logga in") %></p>
+  
+  <% end %>
+</fieldset>
