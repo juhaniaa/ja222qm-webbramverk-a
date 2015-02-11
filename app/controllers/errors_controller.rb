@@ -1,3 +1,4 @@
+# https://github.com/sheerun/rails4-bootstrap/commit/5c2df5a108ad204bc407183b959bb355ff5ed53d
 class ErrorsController < ActionController::Base
 
   # Because we don't inherit from ApplicationController
