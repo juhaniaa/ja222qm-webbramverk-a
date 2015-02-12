@@ -24,8 +24,11 @@ class UsersController < ApplicationController
       render action: :new
     end
   end
-  
+
   def show
+    # Get user here rather than in the view.
+    @user = User.find(session[:userid])
+
     # kolla att användaren är rätt?
     if session[:userid].to_s === params[:id]
       render "show"
@@ -33,7 +36,7 @@ class UsersController < ApplicationController
       redirect_to users_path
     end
   end
-  
+
   # Apinyckelsmetoder
   
   def newkey    
