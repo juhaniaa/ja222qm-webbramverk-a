@@ -5,14 +5,11 @@
   <p><%= flash[:notice] %></p>
 <% end %>
 
-<% @u = User.find(session[:userid]) %>
-
-<% if @u.apikey %>
-  <p><%= @u.apikey  %></p>
+<% if @user.apikey %>
+  <p><%= @user.apikey  %></p>
   <%= link_to "Ta bort nyckel", remkey_path %>
-<% end %>
-<% if !@u.apikey %>
-<%= link_to "Generera nyckel", newkey_path %>
+<% else %>
+  <%= link_to "Generera nyckel", newkey_path %>
 <% end %>
 <%= link_to "Logga ut", logout_path %>
 
