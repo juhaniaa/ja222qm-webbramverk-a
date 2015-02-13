@@ -5,8 +5,10 @@
   <p><%= flash[:notice] %></p>
 <% end %>
 
-<% if @user.apikey %>
-  <p><%= @user.apikey  %></p>
+<%= @user.apikey.to_s %>
+
+<% if @user.apikey.present? %>
+  <p><% @user.apikey  %></p>
   <%= link_to "Ta bort nyckel", remkey_path %>
 <% else %>
   <%= link_to "Generera nyckel", newkey_path %>

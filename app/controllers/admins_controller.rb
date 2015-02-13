@@ -9,14 +9,17 @@ class AdminsController < ApplicationController
   
   # visa alla användare och deras api-nyckel om de har en
   def userkeys 
-    @Users = User.all    
+    @users = User.all    
   end
   
   # post ta bort en användares api-nyckel admin/removekey/:idofUser
-  def removekey 
-    u = User.find(params[:id])
-    u.apikey = nil
-    u.save
+  def removekey     
+    @user = User.find_by_id(params[:id])
+    if @user.update_attribute(:apikey,nil)
+      flash[:notice] = "Nyckeln togs bort"
+    else
+      flash[:notice] = "Fel uppstod"
+    end
     redirect_to aduserkeys_path
   end
   

@@ -6,7 +6,7 @@
   <p><%= flash[:notice] %></p>
 <% end %>
 <ul>
-<% @Users.each do |u| %>
+<% @users.each do |u| %>
   <% if u.apikey %>
     <li><%= u.email %> - <%= u.apikey %> <%= link_to "Ta bort nyckel", adremovekey_path(u.id) %></li>
   <% end %>  

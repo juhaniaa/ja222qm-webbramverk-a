@@ -3,9 +3,11 @@ class UsersController < ApplicationController
   
   def index
     if session[:userid]
-      u = User.find(session[:userid])
+      u = User.find_by_id(session[:userid])
       if u
-        redirect_to u
+        redirect_to u      
+      else
+        session[:userid] = nil
       end
     end
   end
@@ -28,8 +30,7 @@ class UsersController < ApplicationController
 
   def show
     # hämta ut användare
-    @user = User.find(session[:userid])
-
+    @user = User.find(session[:userid])    
     # kolla att användaren är rätt
     if session[:userid].to_s === params[:id]
       render "show"
@@ -41,17 +42,25 @@ class UsersController < ApplicationController
   # Apinyckelsmetoder
   
   def newkey    
-    u = User.find(session[:userid])
-    u.apikey = SecureRandom.hex
-    u.save    
-    redirect_to u
+    @user = User.find_by_id(session[:userid])
+    @user.apikey = SecureRandom.hex
+    if @user.update_attribute(:apikey,SecureRandom.hex)
+      flash[:notice] = "En ny nyckel genererades"
+    else
+      flash[:notice] = "Fel uppstod"
+    end       
+    redirect_to @user
   end
   
   def remkey
-    u = User.find(session[:userid])
-    u.apikey = nil
-    u.save
-    redirect_to u
+    @user = User.find_by_id(session[:userid])
+    
+    if @user.update_attribute(:apikey,nil)
+      flash[:notice] = "Nyckeln togs bort"
+    else
+      flash[:notice] = "Fel uppstod"
+    end
+    redirect_to @user
   end
   
   # Inloggningsmetoder
