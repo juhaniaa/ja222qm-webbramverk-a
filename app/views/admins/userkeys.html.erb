@@ -1,5 +1,6 @@
 <h1>Userkeys</h1>
 <h3>Inloggad som Admin</h3>
+<h4>API-nycklar:</h4>
 
 <% if flash[:notice] %>
   <p><%= flash[:notice] %></p>
@@ -7,8 +8,8 @@
 <ul>
 <% @Users.each do |u| %>
   <% if u.apikey %>
-  <li><%= u.email %> - <%= u.apikey %> <%= link_to "Ta bort nyckel", adremovekey_path(u.id) %></li>
-<% end %>  
+    <li><%= u.email %> - <%= u.apikey %> <%= link_to "Ta bort nyckel", adremovekey_path(u.id) %></li>
+  <% end %>  
 <% end %>
 </ul>
 

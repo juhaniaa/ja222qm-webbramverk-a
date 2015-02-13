@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   end
   
   def create
+    # skapa användare utifrån inskickat formulär
     @user = User.new(user_params)
     
     if @user.save
@@ -26,10 +27,10 @@ class UsersController < ApplicationController
   end
 
   def show
-    # Get user here rather than in the view.
+    # hämta ut användare
     @user = User.find(session[:userid])
 
-    # kolla att användaren är rätt?
+    # kolla att användaren är rätt
     if session[:userid].to_s === params[:id]
       render "show"
     else
@@ -74,6 +75,7 @@ class UsersController < ApplicationController
   
   private
   
+  # parametrar som tillåts då ny användare skapas
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end  

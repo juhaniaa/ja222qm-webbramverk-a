@@ -7,19 +7,21 @@ class AdminsController < ApplicationController
     end
   end
   
-  def userkeys # get all users and their api keys
-    @Users = User.all
-    #render "userkeys"
+  # visa alla användare och deras api-nyckel om de har en
+  def userkeys 
+    @Users = User.all    
   end
   
-  def removekey # post delete an api-key admin/removekey/:idofUser
+  # post ta bort en användares api-nyckel admin/removekey/:idofUser
+  def removekey 
     u = User.find(params[:id])
     u.apikey = nil
     u.save
     redirect_to aduserkeys_path
   end
   
-  def login # post to log in    
+  # post logga in admin 
+  def login 
     if params[:adminName] === "admin" && params[:adminPassword] === "admin"
       session[:admin] = true
       redirect_to aduserkeys_path
@@ -29,13 +31,15 @@ class AdminsController < ApplicationController
     end
   end
   
-  def logout # post to log out
+  # post logga ut admin
+  def logout 
     session[:admin] = nil
     redirect_to admin_path, notice: "Du loggades ut"
   end  
   
   private
   
+  # kolla att inloggad är admin
   def require_admin   
     redirect_to admin_path, notice: "Måste logga in" unless session[:admin]
   end

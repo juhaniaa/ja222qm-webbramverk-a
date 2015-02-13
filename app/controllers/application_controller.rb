@@ -5,10 +5,12 @@ class ApplicationController < ActionController::Base
   
   private
   
+  # hämta ut användare från sessionen
   def current_user
     @current_user ||= User.find(session[:userid]) if session[:userid]
   end
   
+  # se att användaren är inloggad
   def require_login
     if current_user.nil? then
       redirect_to users_path, notice: "Måste logga in"
