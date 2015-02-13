@@ -5,6 +5,7 @@
 3. run rake db:migrate
 4. start server
 
-Admin login at url /admin 
+Admin login
+* url: /admin 
 * username: admin 
 * password: admin
