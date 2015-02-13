@@ -6,5 +6,5 @@
 4. start server
 
 Admin login at url /admin 
-username: admin 
-password: admin
+* username: admin 
+* password: admin
